@@ -1,3 +1,4 @@
+import 'package:desa_pintar/setting.dart';
 import 'package:flutter/material.dart';
 import 'user_login.dart';
 // import 'splash_screen.dart';
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: UserLogin(),
+      home: SettingPage(),
       // initialRoute: SplashScreen.routeName,
       // routes: {
       //   SplashScreen.routeName: (context) => const SplashScreen(),
