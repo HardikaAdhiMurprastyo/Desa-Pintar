@@ -1,6 +1,5 @@
 import 'package:desa_pintar/setting.dart';
 import 'package:flutter/material.dart';
-import 'user_login.dart';
 // import 'splash_screen.dart';
 
 void main() {
