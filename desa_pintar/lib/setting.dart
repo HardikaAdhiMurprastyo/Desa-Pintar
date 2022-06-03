@@ -49,7 +49,7 @@ class _SettingPageState extends State<SettingPage> {
                             padding: const EdgeInsets.all(15.0),
                             child: CircleAvatar(
                               backgroundImage: AssetImage(
-                                  'assets/logo.png'
+                                  'assets/assets_dpin/logo.png'
                               ),
                               radius: 35,
                             ),
@@ -82,7 +82,7 @@ class _SettingPageState extends State<SettingPage> {
             Card(
               child: InkWell(
                 onTap: (){
-                  
+
                 },
                 child: ListTile(
                   leading: Icon(Icons.lock),
