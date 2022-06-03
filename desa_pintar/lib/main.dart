@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: SettingPage(),
+      home:SettingPage(),
       // initialRoute: SplashScreen.routeName,
       // routes: {
       //   SplashScreen.routeName: (context) => const SplashScreen(),

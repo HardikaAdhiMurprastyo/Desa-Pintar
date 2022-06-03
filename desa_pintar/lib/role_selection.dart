@@ -20,7 +20,7 @@ class RoleSelectionPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: 200,
                 child: Image.asset(
-                  'assets/bubble2.png',
+                  'assets/aseets_dpin/bubble2.png',
                   fit: BoxFit.fitHeight,
                 ),
               ),
@@ -29,7 +29,7 @@ class RoleSelectionPage extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.only(top: 100),
-                  child: Image.asset('assets/logo.png'),
+                  child: Image.asset('assets/aseets_dpin/logo.png'),
                 ),
                 const Text(
                   "Welcome to D'PIN",
@@ -142,7 +142,7 @@ class RoleSelectionPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   height: 200,
                   child: Image.asset(
-                    'assets/bubble2.png',
+                    'assets/aseets_dpin/bubble2.png',
                     fit: BoxFit.fitHeight,
                   ),
                 ),
