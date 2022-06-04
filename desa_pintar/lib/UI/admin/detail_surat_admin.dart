@@ -45,7 +45,7 @@ class AdminSurat extends StatelessWidget {
                   ),
                   // color: Colors.yellow,
                   alignment: Alignment.center,
-                  padding: EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(6),
                   child: const Text(
                     'proses',
                     style: TextStyle(
@@ -66,7 +66,7 @@ class AdminSurat extends StatelessWidget {
               children: [
                 Container(
                   alignment: Alignment.centerLeft,
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   child: const Text(
                     'Info Surat',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -90,7 +90,7 @@ class AdminSurat extends StatelessWidget {
                             ),
                             Container(
                               alignment: Alignment.centerLeft,
-                              child: Text('A01/QW20/01'),
+                              child: const Text('A01/QW20/01'),
                             )
                           ],
                         ),
@@ -108,7 +108,7 @@ class AdminSurat extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: const [
@@ -172,7 +172,7 @@ class AdminSurat extends StatelessWidget {
                 ),
                 Container(
                   color: const Color.fromARGB(255, 226, 246, 239),
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   child: Ink(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),

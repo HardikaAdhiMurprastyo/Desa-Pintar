@@ -1,16 +1,15 @@
-
-import 'package:desa_pintar/widget/dropdown.dart';
+import 'package:desa_pintar/widget/dropdown_two.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class AdminLogin extends StatefulWidget {
-  const AdminLogin({Key? key}) : super(key: key);
+class LurahLogin extends StatefulWidget {
+  const LurahLogin({Key? key}) : super(key: key);
 
   @override
-  State<AdminLogin> createState() => _AdminLoginState();
+  State<LurahLogin> createState() => _LurahLoginState();
 }
 
-class _AdminLoginState extends State<AdminLogin> {
+class _LurahLoginState extends State<LurahLogin> {
   bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
@@ -67,7 +66,7 @@ class _AdminLoginState extends State<AdminLogin> {
                                     BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
                                     color: Color.fromARGB(255, 61, 192, 150))),
-                            labelText: 'Email',
+                            hintText: 'Email',
                             hintMaxLines: 1,
                           ),
                         ),
@@ -79,28 +78,28 @@ class _AdminLoginState extends State<AdminLogin> {
                     Container(
                       child: Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+                           const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
                         child: TextField(
                           obscureText: _isObscure,
                           decoration: InputDecoration(
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
-                                    color: const Color.fromARGB(255, 61, 192, 150))),
+                                    color: Color.fromARGB(255, 61, 192, 150))),
                             enabledBorder: const OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
                                     color: Color.fromARGB(255, 61, 192, 150))),
-                            labelText: 'Password',
+                            hintText: 'Password',
                             hintMaxLines: 1,
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _isObscure
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: Color.fromARGB(255, 61, 192, 150),
+                                color: const Color.fromARGB(255, 61, 192, 150),
                               ),
                               onPressed: () {
                                 setState(
@@ -117,7 +116,7 @@ class _AdminLoginState extends State<AdminLogin> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Dropdown(),
+                    const DropDownTwo(),
                     const SizedBox(
                       height: 20,
                     ),
@@ -125,8 +124,8 @@ class _AdminLoginState extends State<AdminLogin> {
                       onPressed: () {},
                       child: const Text('Login'),
                       style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 61, 192, 150),
-                          textStyle: TextStyle(
+                          primary: const Color.fromARGB(255, 61, 192, 150),
+                          textStyle: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                           fixedSize: const Size(310, 45),
                           shape: RoundedRectangleBorder(

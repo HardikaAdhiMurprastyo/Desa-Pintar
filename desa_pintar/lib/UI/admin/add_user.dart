@@ -57,16 +57,16 @@ class _NewUserState extends State<NewUser> {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 30),
+                margin: const EdgeInsets.only(top: 30),
                 alignment: Alignment.center,
-                child: Text(
+                child: const Text(
                   'Silahkan isi data form berikut ini sesuai dengan\n e-KTP ataupun KK',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16),
                 ),
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   color: Color.fromARGB(255, 227, 227, 227),
                 ),
@@ -76,7 +76,7 @@ class _NewUserState extends State<NewUser> {
                 child: Column(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 30),
+                      margin: const EdgeInsets.only(top: 30),
                       width: 312,
                       child: const TextField(
                         decoration: InputDecoration(
@@ -97,7 +97,7 @@ class _NewUserState extends State<NewUser> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Container(
@@ -121,13 +121,13 @@ class _NewUserState extends State<NewUser> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Container(
                       width: 312,
                       child: DropdownButtonFormField<String>(
-                        hint: Text('Jenis Kelamin'),
+                        hint: const Text('Jenis Kelamin'),
                         decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -154,13 +154,13 @@ class _NewUserState extends State<NewUser> {
                             setState(() => selectedItem1 = item),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Container(
                       width: 312,
                       child: DropdownButtonFormField<String>(
-                        hint: Text('Status Perkawinan'),
+                        hint: const Text('Status Perkawinan'),
                         decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -186,13 +186,13 @@ class _NewUserState extends State<NewUser> {
                             setState(() => selectedItem2 = item),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Container(
                       width: 312,
                       child: DropdownButtonFormField<String>(
-                        hint: Text('Agama'),
+                        hint: const Text('Agama'),
                         decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -217,13 +217,13 @@ class _NewUserState extends State<NewUser> {
                             setState(() => selectedItem3 = item),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Container(
                       width: 312,
                       child: DropdownButtonFormField<String>(
-                        hint: Text('Pendidikan'),
+                        hint: const Text('Pendidikan'),
                         decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -249,7 +249,7 @@ class _NewUserState extends State<NewUser> {
                             setState(() => selectedItem5 = item),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Container(
@@ -281,7 +281,7 @@ class _NewUserState extends State<NewUser> {
                     Container(
                       width: 312,
                       height: maxLines * 24.0,
-                      margin: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(10),
                       child: TextField(
                         maxLines: maxLines,
                         decoration: const InputDecoration(
@@ -329,8 +329,8 @@ class _NewUserState extends State<NewUser> {
                       onPressed: () {},
                       child: const Text('Kirim'),
                       style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 61, 192, 150),
-                          textStyle: TextStyle(
+                          primary: const Color.fromARGB(255, 61, 192, 150),
+                          textStyle: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                           fixedSize: const Size(290, 45),
                           shape: RoundedRectangleBorder(
