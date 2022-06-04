@@ -1,9 +1,9 @@
+import 'package:desa_pintar/UI/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'home_user.dart';
-import 'pengajuan_user.dart';
-import 'riwayat_user.dart';
-import 'pengaturan_user.dart';
+import '../user/home_user.dart';
+import '../user/list_surat.dart';
+import '../user/riwayat.dart';
 //import halaman belum
 
 class BottomUser extends StatefulWidget {
@@ -17,9 +17,9 @@ class _BottomUserState extends State<BottomUser> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomeUser(),
-    PengajuanUser(),
-    RiwayatUser(),
-    PengaturanUser(),
+    ListSurat(),
+    RiwayatPage(),
+    SettingPage(),
   ];
 
   @override

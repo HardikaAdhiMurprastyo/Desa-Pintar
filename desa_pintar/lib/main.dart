@@ -1,4 +1,4 @@
-import 'package:desa_pintar/setting.dart';
+import 'package:desa_pintar/UI/setting.dart';
 import 'package:flutter/material.dart';
 // import 'splash_screen.dart';
 
