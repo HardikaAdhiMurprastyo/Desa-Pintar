@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: 
                   Container(
                     child: Image.asset(
-                      'assets/backlogo.png',
+                      'assets/assets_dpin/backLogo.png',
                     ),
                   ),
                 ),
@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Container(
                     padding: EdgeInsets.only(top: 40),
                     child: Image.asset(
-                      'assets/logo.png',
+                      'assets/assets_dpin/logo.png',
                     ),
                   ),
                 ),

@@ -1,7 +1,12 @@
+import 'dart:convert';
 
+import 'package:http/http.dart' as http;
 import 'package:desa_pintar/widget/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import '../admin/bottomnavbar_admin.dart';
+import '../role_selection.dart';
 
 class AdminLogin extends StatefulWidget {
   const AdminLogin({Key? key}) : super(key: key);
@@ -12,6 +17,51 @@ class AdminLogin extends StatefulWidget {
 
 class _AdminLoginState extends State<AdminLogin> {
   bool _isObscure = true;
+  late String username, status;
+  String alert = "Ready for Login";
+  TextEditingController user = TextEditingController();
+  TextEditingController pass = TextEditingController();
+
+  void _login() async {
+    final response = await http.post(
+        Uri.parse("http://192.168.1.10/dpin_database/login_admin.php"),
+        body: {
+          "username": user.text,
+          "password": pass.text,
+        });
+    var datauser = await json.decode(response.body);
+    if (datauser.length < 1) {
+      setState(() {
+        alert = "You can't login";
+      });
+    } else {
+      setState(() {
+        username = datauser[0]["username"];
+        status = datauser[0]["status"];
+      });
+      if (status == 'rt') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const BottomNavbar()),
+        );
+      } else if (status == 'rw') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const BottomNavbar()),
+        );
+      } else if (status == 'kelurahan') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const BottomNavbar()),
+        );
+      } else {
+        setState(() {
+        alert = "Account not register";
+      });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +77,7 @@ class _AdminLoginState extends State<AdminLogin> {
                   width: MediaQuery.of(context).size.width,
                   height: 200,
                   child: Image.asset(
-                    'assets/bubble2.png',
+                    'assets/assets_dpin/bubble2.png',
                     fit: BoxFit.fitHeight,
                   ),
                 ),
@@ -38,7 +88,9 @@ class _AdminLoginState extends State<AdminLogin> {
                 child: Column(
                   children: [
                     Container(
-                        child: Center(child: Image.asset('assets/ilust2.png'))),
+                        child: Center(
+                            child:
+                                Image.asset('assets/assets_dpin/ilust2.png'))),
                     Container(
                       alignment: Alignment.center,
                       padding: const EdgeInsets.only(top: 25),
@@ -52,11 +104,12 @@ class _AdminLoginState extends State<AdminLogin> {
                       height: 30,
                     ),
                     Container(
-                      child: const Padding(
+                      child: Padding(
                         padding:
                             EdgeInsets.symmetric(horizontal: 40, vertical: 5),
                         child: TextField(
-                          decoration: InputDecoration(
+                          controller: user,
+                          decoration: const InputDecoration(
                             focusedBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
@@ -78,21 +131,24 @@ class _AdminLoginState extends State<AdminLogin> {
                     ),
                     Container(
                       child: Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 5),
                         child: TextField(
+                          controller: pass,
                           obscureText: _isObscure,
                           decoration: InputDecoration(
                             focusedBorder: const OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
-                                    color: const Color.fromARGB(255, 61, 192, 150))),
+                                    color: const Color.fromARGB(
+                                        255, 61, 192, 150))),
                             enabledBorder: const OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
-                                    color: const Color.fromARGB(255, 61, 192, 150))),
+                                    color: const Color.fromARGB(
+                                        255, 61, 192, 150))),
                             labelText: 'Password',
                             hintMaxLines: 1,
                             suffixIcon: IconButton(
@@ -115,14 +171,12 @@ class _AdminLoginState extends State<AdminLogin> {
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
-                    ),
-                    const Dropdown(),
-                    const SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _login();
+                      },
                       child: const Text('Login'),
                       style: ElevatedButton.styleFrom(
                           primary: const Color.fromARGB(255, 61, 192, 150),
@@ -132,6 +186,32 @@ class _AdminLoginState extends State<AdminLogin> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20))),
                     ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    InkWell(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            'Choose a Role',
+                            style: TextStyle(
+                              fontSize: 14,
+                              // fontWeight: FontWeight.w200,
+                              color:  Color.fromARGB(255, 61, 192, 150),
+                              // decoration: TextDecoration.underline
+                            ),
+                          ),
+                        ],
+                      ),
+                      onTap: () {
+                        Navigator.pop(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RoleSelectionPage()),
+                        );
+                      },
+                    )
                   ],
                 ),
               )),
@@ -147,7 +227,7 @@ class _AdminLoginState extends State<AdminLogin> {
                     width: MediaQuery.of(context).size.width,
                     height: 150,
                     child: Image.asset(
-                      'assets/bubble2.png',
+                      'assets/assets_dpin/bubble2.png',
                       fit: BoxFit.fitHeight,
                     ),
                   ),

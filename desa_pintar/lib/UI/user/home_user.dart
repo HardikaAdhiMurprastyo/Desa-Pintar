@@ -40,12 +40,15 @@ class _HomeUserState extends State<HomeUser> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'REKOMENDASI',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
+                  Container(
+                    margin: EdgeInsets.only(left: 15),
+                    child: const Text(
+                      'REKOMENDASI',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                   CarouselSlider(
@@ -124,12 +127,15 @@ class _HomeUserState extends State<HomeUser> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    'BERITA TERSPICY',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
+                  Container(
+                    margin: EdgeInsets.only(left: 15),
+                    child: const Text(
+                      'BERITA TERSPICY',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                   Column(
@@ -186,7 +192,7 @@ class _HomeUserState extends State<HomeUser> {
                                           borderRadius:
                                               BorderRadius.circular(30),
                                           child:
-                                              Image.asset('assets/berita2.jpg'),
+                                              Image.asset('assets/assets_dpin/logo.png'),
                                         ),
                                       ),
                                       //   ),

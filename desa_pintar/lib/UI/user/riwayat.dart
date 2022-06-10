@@ -53,7 +53,7 @@ class RiwayatPage extends StatelessWidget {
                         topRight: Radius.circular(10)),
                     child: FittedBox(
                       child:
-                      Image.asset('assets/logo.png'),
+                      Image.asset('assets/assets_dpin/logo.png'),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -91,7 +91,7 @@ class RiwayatPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left:MediaQuery.of(context).size.height * .26),
+                    margin: EdgeInsets.only(left:MediaQuery.of(context).size.height * .20),
                     height: MediaQuery.of(context).size.height * .04,
                     width: MediaQuery.of(context).size.width * .13,
                     decoration: BoxDecoration(

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'daftar_warga.dart';
 import 'home_admin.dart';
 import 'list_pengajuan.dart';
 import 'arsip_admin.dart';
-import 'pengaturan_admin.dart';
+
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({Key? key}) : super(key: key);
@@ -16,11 +15,11 @@ class BottomNavbar extends StatefulWidget {
 class _BottomNavbarState extends State<BottomNavbar> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    HomeAdmin(),
+    HomeAdminPage(),
     ListPengajuan(),
     ArsipAdmin(),
-    DaftarWarga(),
-    PengaturanAdmin(),
+    // DaftarWarga(),
+    // PengaturanAdmin(),
   ];
 
   @override

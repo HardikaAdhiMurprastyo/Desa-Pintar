@@ -26,7 +26,7 @@ class _LurahLoginState extends State<LurahLogin> {
                   width: MediaQuery.of(context).size.width,
                   height: 200,
                   child: Image.asset(
-                    'assets/bubble2.png',
+                    'assets/assets_dpin/bubble2.png',
                     fit: BoxFit.fitHeight,
                   ),
                 ),
@@ -37,7 +37,7 @@ class _LurahLoginState extends State<LurahLogin> {
                 child: Column(
                   children: [
                     Container(
-                        child: Center(child: Image.asset('assets/ilust2.png'))),
+                        child: Center(child: Image.asset('assets/assets_dpin/ilust2.png'))),
                     Container(
                       alignment: Alignment.center,
                       padding: const EdgeInsets.only(top: 25),
@@ -114,10 +114,6 @@ class _LurahLoginState extends State<LurahLogin> {
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
-                    ),
-                    const DropDownTwo(),
-                    const SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
@@ -146,7 +142,7 @@ class _LurahLoginState extends State<LurahLogin> {
                     width: MediaQuery.of(context).size.width,
                     height: 150,
                     child: Image.asset(
-                      'assets/bubble2.png',
+                      'assets/assets_dpin/bubble2.png',
                       fit: BoxFit.fitHeight,
                     ),
                   ),

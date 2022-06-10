@@ -1,8 +1,12 @@
+import 'package:desa_pintar/UI/role_selection.dart';
 import 'package:desa_pintar/widget/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
+
+import '../user/bottom_user.dart';
 
 class UserLogin extends StatefulWidget {
   const UserLogin({Key? key}) : super(key: key);
@@ -13,11 +17,56 @@ class UserLogin extends StatefulWidget {
 
 class _UserLoginState extends State<UserLogin> {
   bool _isObscure = true;
+  late String nik, password;
+  String alert = "Ready for Login";
+  TextEditingController user = TextEditingController();
+  TextEditingController pass = TextEditingController();
+
+  void _login() async {
+    final response = await http.post(
+        Uri.parse("http://192.168.1.10/dpin_database/login_warga.php"),
+        body: {
+          "NIK": user.text,
+          "password": pass.text,
+        });
+    var datauser = await json.decode(response.body);
+    if (datauser.length < 1) {
+      setState(() {
+        alert = "You can't login";
+      });
+    } else {
+      // setState(() {
+      //   nik = datauser[0]['NIK'];
+      //   // pass = datauser[0]['password'].toString() as TextEditingController;
+      // });
+      if (datauser[0]['NIK'] == user.text &&
+          datauser[0]['password'] == pass.text) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const BottomUser()),
+        );
+      } else if (user.text == null && pass.text == null) {
+        setState(() {
+          alert = "Masukan NIK dan Password!";
+        });
+      } else if (datauser[0]['NIK'] != user.text &&
+          datauser[0]['password'] != pass.text) {
+        setState(() {
+          alert = "NIK dan Password salah";
+        });
+      } else {
+        setState(() {
+          alert = "Account not register";
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false, 
+        resizeToAvoidBottomInset: false,
         body: LayoutBuilder(
           builder: (context, constraints) => Stack(
             children: [
@@ -28,7 +77,7 @@ class _UserLoginState extends State<UserLogin> {
                   width: MediaQuery.of(context).size.width,
                   height: 200,
                   child: Image.asset(
-                    'assets/bubble2.png',
+                    'assets/assets_dpin/bubble2.png',
                     fit: BoxFit.fitHeight,
                   ),
                 ),
@@ -39,7 +88,9 @@ class _UserLoginState extends State<UserLogin> {
                 child: Column(
                   children: [
                     Container(
-                        child: Center(child: Image.asset('assets/ilust1.png'))),
+                        child: Center(
+                            child:
+                                Image.asset('assets/assets_dpin/ilust1.png'))),
                     Container(
                       alignment: Alignment.center,
                       padding: const EdgeInsets.only(top: 25),
@@ -57,10 +108,10 @@ class _UserLoginState extends State<UserLogin> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 40, vertical: 5),
                         child: TextField(
-                          // maxLength: 16,
+                          controller: user,
                           keyboardType: TextInputType.number,
                           inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
+                            // FilteringTextInputFormatter.digitsOnly,
                             LengthLimitingTextInputFormatter(16),
                           ],
                           decoration: const InputDecoration(
@@ -88,6 +139,7 @@ class _UserLoginState extends State<UserLogin> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 40, vertical: 5),
                         child: TextField(
+                          controller: pass,
                           obscureText: _isObscure,
                           decoration: InputDecoration(
                             focusedBorder: const OutlineInputBorder(
@@ -122,14 +174,12 @@ class _UserLoginState extends State<UserLogin> {
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
-                    ),
-                    Dropdown(),
-                    const SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _login();
+                      },
                       child: const Text('Login'),
                       style: ElevatedButton.styleFrom(
                           primary: Color.fromARGB(255, 61, 192, 150),
@@ -139,6 +189,32 @@ class _UserLoginState extends State<UserLogin> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20))),
                     ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    InkWell(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            'Choose a Role',
+                            style: TextStyle(
+                              fontSize: 14,
+                              // fontWeight: FontWeight.w200,
+                              color:  Color.fromARGB(255, 61, 192, 150),
+                              // decoration: TextDecoration.underline
+                            ),
+                          ),
+                        ],
+                      ),
+                      onTap: () {
+                        Navigator.pop(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RoleSelectionPage()),
+                        );
+                      },
+                    )
                   ],
                 ),
               )),
@@ -151,7 +227,7 @@ class _UserLoginState extends State<UserLogin> {
                     width: MediaQuery.of(context).size.width,
                     height: 200,
                     child: Image.asset(
-                      'assets/bubble2.png',
+                      'assets/assets_dpin/bubble2.png',
                       fit: BoxFit.fitHeight,
                     ),
                   ),
