@@ -1,4 +1,4 @@
-import 'package:desa_pintar/UI/setting.dart';
+import 'package:desa_pintar/presentation/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import '../user/home_user.dart';
