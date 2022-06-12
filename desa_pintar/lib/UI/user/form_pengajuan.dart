@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class FormPengajuan extends StatefulWidget {
   const FormPengajuan({Key? key}) : super(key: key);
@@ -9,32 +10,60 @@ class FormPengajuan extends StatefulWidget {
 }
 
 class _FormPengajuanState extends State<FormPengajuan> {
-  List<String> gender = ['Pria', 'Wanita'];
-  String? selectedItem1 = 'Jenis Kelamin';
+  List _get = [];
 
-  List<String> Perkawinan = ['Sudah', 'Belum Menikah'];
-  String? selectedItem2 = 'Status Perkawinan';
+  @override
+  void initState() {
+    super.initState();
+    //in first time, this method will be executed
+    _getData();
+  }
 
-  List<String> Agama = [
-    'Islam',
-    'Kristen',
-    'Katolik',
-    'Hindu',
-    'Budha',
-    'Konghucu'
-  ];
-  String? selectedItem3 = 'Agama';
+  Future _getData() async {
+    try {
+      final response = await http.get(Uri.parse(
+        //you have to take the ip address of your computer.
+        //because using localhost will cause an error
+          "http://192.168.0.106/dpin/data_warga.php"));
 
-  List<String> Pekerjaan = [
-    'Pelajar/Mahasiswa',
-    'Wiraswasta',
-    'PNS',
-    'Belum/Tidak Bekerja'
-  ];
-  String? selectedItem4 = 'Status Perkawinan';
+      // if response successful
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
 
-  List<String> Pendidikan = ['SD','SMP','SMA', 'S1', 'S2', 'S3'];
-  String? selectedItem5 = 'Pendidikan Terakhir';
+        // entry data to variabel list _get
+        setState(() {
+          _get = data;
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  // var level = '1';
+  // var status = 'diajukan';
+  // var jenis =
+  // Future _onSubmit() async {
+  //   try {
+  //     return await http.post(
+  //       Uri.parse("http://192.168.0.106/dpin/crud/create.php"),
+  //       body: {
+  //         "title": title.text,
+  //         "content": content.text,
+  //       },
+  //     ).then((value) {
+  //       //print message after insert to database
+  //       //you can improve this message with alert dialog
+  //       var data = jsonDecode(value.body);
+  //       print(data["message"]);
+
+  //       Navigator.of(context)
+  //           .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+  //     });
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -57,289 +86,272 @@ class _FormPengajuanState extends State<FormPengajuan> {
               ),
             ),
           ),
-          title: const Text('Form Surat Pengajuan SKCK'),
+          title: const Text('Konfirmasi Data Diri'),
         ),
-        body: SingleChildScrollView(
+        body:
+        SingleChildScrollView(
           child: Column(
             children: [
               Container(
                 margin: EdgeInsets.only(top: 30),
                 alignment: Alignment.center,
-                  child: Text(
-                    'Silahkan isi data form berikut ini sesuai dengan\n e-KTP ataupun KK',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
+                child: Text(
+                  'Silahkan isi data form berikut ini sesuai dengan\n e-KTP ataupun KK',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+              _get.length != 0
+                  ?
+              ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: _get.length,
+                  itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          color: Color.fromARGB(255, 227, 227, 227),
+                        ),
+                        alignment: Alignment.center,
+                        margin: const EdgeInsets.only(
+                            top: 20,
+                            right: 20,
+                            left: 20,
+                            bottom: 30
+                        ),
+
+                        child:Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(top: 30),
+                              width: 312,
+                              child: TextFormField(
+                                // enabled: false,
+                                readOnly: true,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 61, 192, 150))),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 61, 192, 150))),
+                                  labelText: '${_get[index]['nama']}',
+                                  hintMaxLines: 1,
+                                ),
+                              ),
+                            ),
+                            // SizedBox(
+                            //   height: 8,
+                            // ),
+                            Container(
+                              margin: EdgeInsets.only(top: 30),
+                              width: 312,
+                              child: TextFormField(
+                                // enabled: false,
+                                readOnly: true,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 61, 192, 150))),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 61, 192, 150))),
+                                  labelText: '${_get[index]['tempat_lahir']}/${_get[index]['tanggal_lahir']}',
+                                  hintMaxLines: 1,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 30),
+                              width: 312,
+                              child: TextFormField(
+                                // enabled: false,
+                                readOnly: true,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 61, 192, 150))),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 61, 192, 150))),
+                                  labelText: '${_get[index]['jenis_kelamin']}',
+                                  hintMaxLines: 1,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 30),
+                              width: 312,
+                              child: TextFormField(
+                                // enabled: false,
+                                readOnly: true,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 61, 192, 150))),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 61, 192, 150))),
+                                  labelText: '${_get[index]['NIK']}',
+                                  hintMaxLines: 1,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 30),
+                              width: 312,
+                              child: TextFormField(
+                                // enabled: false,
+                                readOnly: true,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 61, 192, 150))),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 61, 192, 150))),
+                                  labelText: '${_get[index]['agama']}',
+                                  hintMaxLines: 1,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 30),
+                              width: 312,
+                              child: TextFormField(
+                                // enabled: false,
+                                readOnly: true,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 61, 192, 150))),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 61, 192, 150))),
+                                  labelText: '${_get[index]['Pekerjaan']}',
+                                  hintMaxLines: 1,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 30),
+                              width: 312,
+                              child: TextFormField(
+                                // enabled: false,
+                                readOnly: true,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 61, 192, 150))),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color.fromARGB(255, 61, 192, 150))),
+                                  labelText: '${_get[index]['alamat']}',
+                                  hintMaxLines: 1,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                }
+              )
+                  : Center(
+                child: Text(
+                  "No Data Available",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: Color.fromARGB(255, 227, 227, 227),
-                ),
-                alignment: Alignment.center,
-                margin: const EdgeInsets.only(
-                  top: 20,
-                  right: 20,
-                  left: 20,
-                  bottom: 30
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 30),
-                      width: 312,
-                      child: const TextField(
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                          labelText: 'Nama Lengkap',
-                          hintMaxLines: 1,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      width: 312,
-                      child: const TextField(
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                          labelText: 'Tempat/Tanggal Lahir',
-                          hintMaxLines: 1,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      width: 312,
-                      child: DropdownButtonFormField<String>(
-                        hint: Text('Jenis Kelamin'),
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          contentPadding: EdgeInsets.all(15.0),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                        ),
-                        items: gender
-                            .map((item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                )))
-                            .toList(),
-                        onChanged: (item) => setState(() => selectedItem1 = item),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      width: 312,
-                      child: DropdownButtonFormField<String>(
-                        hint: Text('Status Perkawinan'),
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          contentPadding: EdgeInsets.all(15.0),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                        ),
-                        items: Perkawinan.map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                            ))).toList(),
-                        onChanged: (item) => setState(() => selectedItem2 = item),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      width: 312,
-                      child: DropdownButtonFormField<String>(
-                        hint: Text('Agama'),
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          contentPadding: EdgeInsets.all(15.0),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                        ),
-                        items: Agama.map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                            ))).toList(),
-                        onChanged: (item) => setState(() => selectedItem3 = item),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      width: 312,
-                      child: DropdownButtonFormField<String>(
-                        hint: Text('Pekerjaan'),
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          contentPadding: EdgeInsets.all(15.0),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                        ),
-                        items: Pekerjaan.map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                            ))).toList(),
-                        onChanged: (item) => setState(() => selectedItem4 = item),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      width: 312,
-                      child: DropdownButtonFormField<String>(
-                        hint: Text('Pendidikan'),
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          contentPadding: EdgeInsets.all(15.0),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                        ),
-                        items: Pendidikan.map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                            ))).toList(),
-                        onChanged: (item) => setState(() => selectedItem5 = item),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      width: 312,
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          LengthLimitingTextInputFormatter(16),
-                        ],
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                          labelText: 'NIK',
-                          hintMaxLines: 1,
-                        ),
-                      ),
-                    ),
-
-                    Container(
-                      width: 312,
-                      height: maxLines * 24.0,
-                      margin: EdgeInsets.all(10),
-                      child: TextField(
-                        maxLines: maxLines,
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 61, 192, 150))),
-                          labelText: 'Alamat',
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Kirim'),
-                      style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 61, 192, 150),
-                          textStyle:
-                              TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                          fixedSize: const Size(290, 45),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20))),
-                    ),
-                     const SizedBox(
-                      height: 50,
-                    ),
-                  ],
-                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  
+                },
+                child: const Text('Ajukan'),
+                style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 61, 192, 150),
+                    textStyle:
+                    TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                    fixedSize: const Size(290, 45),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20))),
+              ),
+              const SizedBox(
+                height: 50,
               ),
             ],
           ),
-        ));
+        ),
+
+    );
   }
 }
