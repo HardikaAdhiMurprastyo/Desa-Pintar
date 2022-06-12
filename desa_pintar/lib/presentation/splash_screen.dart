@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:desa_pintar/UI/role_selection.dart';
+import 'package:desa_pintar/presentation/role_selection.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {

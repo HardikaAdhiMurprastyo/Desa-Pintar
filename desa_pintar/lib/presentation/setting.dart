@@ -1,3 +1,4 @@
+import 'package:desa_pintar/presentation/password_setting.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -82,7 +83,8 @@ class _SettingPageState extends State<SettingPage> {
             Card(
               child: InkWell(
                 onTap: (){
-
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) =>PasswordSettingPage()));
                 },
                 child: ListTile(
                   leading: Icon(Icons.lock),

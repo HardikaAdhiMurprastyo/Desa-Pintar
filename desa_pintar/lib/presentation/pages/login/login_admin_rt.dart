@@ -1,63 +1,63 @@
-import 'package:desa_pintar/UI/role_selection.dart';
-import 'package:desa_pintar/widget/dropdown.dart';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'package:desa_pintar/presentation/widget/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart';
 
-import '../user/bottom_user.dart';
+import '../admin/bottomnavbar_admin.dart';
+import 'package:desa_pintar/presentation/role_selection.dart';
 
-class UserLogin extends StatefulWidget {
-  const UserLogin({Key? key}) : super(key: key);
+class AdminLogin extends StatefulWidget {
+  const AdminLogin({Key? key}) : super(key: key);
 
   @override
-  State<UserLogin> createState() => _UserLoginState();
+  State<AdminLogin> createState() => _AdminLoginState();
 }
 
-class _UserLoginState extends State<UserLogin> {
+class _AdminLoginState extends State<AdminLogin> {
   bool _isObscure = true;
-  late String nik, password;
-  String alert = "Ready for Login";
+  late String username, status;
+  String alert = "";
   TextEditingController user = TextEditingController();
   TextEditingController pass = TextEditingController();
 
   void _login() async {
     final response = await http.post(
-        Uri.parse("http://192.168.1.10/dpin_database/login_warga.php"),
+        Uri.parse("http://192.168.1.10/dpin_database/login_admin.php"),
         body: {
-          "NIK": user.text,
+          "username": user.text,
           "password": pass.text,
         });
     var datauser = await json.decode(response.body);
     if (datauser.length < 1) {
       setState(() {
-        alert = "You can't login";
+        alert = "Gagal login, NIK atau Password salah";
       });
     } else {
-      // setState(() {
-      //   nik = datauser[0]['NIK'];
-      //   // pass = datauser[0]['password'].toString() as TextEditingController;
-      // });
-      if (datauser[0]['NIK'] == user.text &&
-          datauser[0]['password'] == pass.text) {
+      setState(() {
+        username = datauser[0]["username"];
+        status = datauser[0]["status"];
+      });
+      if (status == 'rt') {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const BottomUser()),
+          MaterialPageRoute(builder: (context) => const BottomNavbar()),
         );
-      } else if (user.text == null && pass.text == null) {
-        setState(() {
-          alert = "Masukan NIK dan Password!";
-        });
-      } else if (datauser[0]['NIK'] != user.text &&
-          datauser[0]['password'] != pass.text) {
-        setState(() {
-          alert = "NIK dan Password salah";
-        });
+      } else if (status == 'rw') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const BottomNavbar()),
+        );
+      } else if (status == 'kelurahan') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const BottomNavbar()),
+        );
       } else {
         setState(() {
-          alert = "Account not register";
-        });
+        alert = "Account not register";
+      });
       }
     }
   }
@@ -90,12 +90,12 @@ class _UserLoginState extends State<UserLogin> {
                     Container(
                         child: Center(
                             child:
-                                Image.asset('assets/assets_dpin/ilust1.png'))),
+                                Image.asset('assets/assets_dpin/ilust2.png'))),
                     Container(
                       alignment: Alignment.center,
                       padding: const EdgeInsets.only(top: 25),
                       child: const Text(
-                        'Login User',
+                        'Login Admin',
                         style: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
@@ -109,11 +109,6 @@ class _UserLoginState extends State<UserLogin> {
                             EdgeInsets.symmetric(horizontal: 40, vertical: 5),
                         child: TextField(
                           controller: user,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            // FilteringTextInputFormatter.digitsOnly,
-                            LengthLimitingTextInputFormatter(16),
-                          ],
                           decoration: const InputDecoration(
                             focusedBorder: OutlineInputBorder(
                                 borderRadius:
@@ -125,7 +120,7 @@ class _UserLoginState extends State<UserLogin> {
                                     BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
                                     color: Color.fromARGB(255, 61, 192, 150))),
-                            labelText: 'NIK',
+                            labelText: 'Username',
                             hintMaxLines: 1,
                           ),
                         ),
@@ -136,8 +131,8 @@ class _UserLoginState extends State<UserLogin> {
                     ),
                     Container(
                       child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 5),
                         child: TextField(
                           controller: pass,
                           obscureText: _isObscure,
@@ -146,12 +141,14 @@ class _UserLoginState extends State<UserLogin> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 61, 192, 150))),
+                                    color: const Color.fromARGB(
+                                        255, 61, 192, 150))),
                             enabledBorder: const OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 61, 192, 150))),
+                                    color: const Color.fromARGB(
+                                        255, 61, 192, 150))),
                             labelText: 'Password',
                             hintMaxLines: 1,
                             suffixIcon: IconButton(
@@ -159,7 +156,7 @@ class _UserLoginState extends State<UserLogin> {
                                 _isObscure
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: Color.fromARGB(255, 61, 192, 150),
+                                color: const Color.fromARGB(255, 61, 192, 150),
                               ),
                               onPressed: () {
                                 setState(
@@ -176,14 +173,15 @@ class _UserLoginState extends State<UserLogin> {
                     const SizedBox(
                       height: 20,
                     ),
+                    Text(alert,style: TextStyle(fontSize: 14, color: Colors.red),),
                     ElevatedButton(
                       onPressed: () {
                         _login();
                       },
                       child: const Text('Login'),
                       style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 61, 192, 150),
-                          textStyle: TextStyle(
+                          primary: const Color.fromARGB(255, 61, 192, 150),
+                          textStyle: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                           fixedSize: const Size(310, 45),
                           shape: RoundedRectangleBorder(
@@ -219,13 +217,16 @@ class _UserLoginState extends State<UserLogin> {
                 ),
               )),
               Positioned(
+                // left: -constraints.maxWidth * .1,
                 right: -constraints.maxWidth * .31,
-                top: constraints.maxHeight * .80,
+
+                top: constraints.maxHeight * .86,
+
                 child: Transform.rotate(
                   angle: -math.pi / 1,
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    height: 200,
+                    height: 150,
                     child: Image.asset(
                       'assets/assets_dpin/bubble2.png',
                       fit: BoxFit.fitHeight,

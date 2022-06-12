@@ -8,7 +8,6 @@ class PasswordSettingPage extends StatefulWidget {
   State<PasswordSettingPage> createState() => _PasswordSettingPageState();
 }
 
-
 class _PasswordSettingPageState extends State<PasswordSettingPage> {
   bool _isObscure = true;
   @override

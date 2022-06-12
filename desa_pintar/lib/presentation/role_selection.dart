@@ -1,5 +1,5 @@
-import 'package:desa_pintar/UI/login/login_admin_rt.dart';
-import 'package:desa_pintar/UI/login/login_user.dart';
+import 'package:desa_pintar/presentation/pages/login/login_admin_rt.dart';
+import 'package:desa_pintar/presentation/pages/login/login_user.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 

@@ -1,3 +1,5 @@
+import 'package:desa_pintar/presentation/pages/admin/list_pengajuan.dart';
+import 'package:desa_pintar/presentation/pages/user/form_pengajuan.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -38,11 +40,12 @@ class _ListSuratState extends State<ListSurat> {
             Card(
               child: InkWell(
                 onTap: (){
-                  
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => FormPengajuan()));
                 },
                 child: const ListTile(
                   title: Text(
-                    'Surat Penghantar SKCK',
+                    'Surat Surat Keterangan Domisili',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.normal,
@@ -58,11 +61,12 @@ class _ListSuratState extends State<ListSurat> {
             Card(
               child: InkWell(
                 onTap: (){
-                  
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => FormPengajuan()));
                 },
                 child: const ListTile(
                   title: Text(
-                    'Surat Penghantar SKCK',
+                    'Surat Penghantar Kartu Keluarga',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.normal,
