@@ -120,7 +120,7 @@ class _AdminLoginState extends State<AdminLogin> {
                                     BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
                                     color: Color.fromARGB(255, 61, 192, 150))),
-                            labelText: 'Email',
+                            labelText: 'Username',
                             hintMaxLines: 1,
                           ),
                         ),
