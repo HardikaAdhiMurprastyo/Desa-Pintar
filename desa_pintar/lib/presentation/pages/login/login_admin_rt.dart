@@ -18,7 +18,7 @@ class AdminLogin extends StatefulWidget {
 class _AdminLoginState extends State<AdminLogin> {
   bool _isObscure = true;
   late String username, status;
-  String alert = "Ready for Login";
+  String alert = "";
   TextEditingController user = TextEditingController();
   TextEditingController pass = TextEditingController();
 
@@ -32,7 +32,7 @@ class _AdminLoginState extends State<AdminLogin> {
     var datauser = await json.decode(response.body);
     if (datauser.length < 1) {
       setState(() {
-        alert = "You can't login";
+        alert = "Gagal login, NIK atau Password salah";
       });
     } else {
       setState(() {
@@ -120,7 +120,7 @@ class _AdminLoginState extends State<AdminLogin> {
                                     BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
                                     color: Color.fromARGB(255, 61, 192, 150))),
-                            labelText: 'Email',
+                            labelText: 'Username',
                             hintMaxLines: 1,
                           ),
                         ),
@@ -173,6 +173,7 @@ class _AdminLoginState extends State<AdminLogin> {
                     const SizedBox(
                       height: 20,
                     ),
+                    Text(alert,style: TextStyle(fontSize: 14, color: Colors.red),),
                     ElevatedButton(
                       onPressed: () {
                         _login();

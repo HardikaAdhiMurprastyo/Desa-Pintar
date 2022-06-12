@@ -17,7 +17,7 @@ class UserLogin extends StatefulWidget {
 class _UserLoginState extends State<UserLogin> {
   bool _isObscure = true;
   late String nik, password;
-  String alert = "Ready for Login";
+  String alert = "";
   TextEditingController user = TextEditingController();
   TextEditingController pass = TextEditingController();
 
@@ -29,35 +29,16 @@ class _UserLoginState extends State<UserLogin> {
           "password": pass.text,
         });
     var datauser = await json.decode(response.body);
-    if (datauser.length < 1) {
+    if (datauser.length == 0) {
       setState(() {
-        alert = "You can't login";
+        alert = "Gagal login, NIK atau Password salah";
       });
-    } else {
-      // setState(() {
-      //   nik = datauser[0]['NIK'];
-      //   // pass = datauser[0]['password'].toString() as TextEditingController;
-      // });
-      if (datauser[0]['NIK'] == user.text &&
-          datauser[0]['password'] == pass.text) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const BottomUser()),
-        );
-      } else if (user.text == null && pass.text == null) {
-        setState(() {
-          alert = "Masukan NIK dan Password!";
-        });
-      } else if (datauser[0]['NIK'] != user.text &&
-          datauser[0]['password'] != pass.text) {
-        setState(() {
-          alert = "NIK dan Password salah";
-        });
-      } else {
-        setState(() {
-          alert = "Account not register";
-        });
-      }
+    } else if (datauser[0]['NIK'] == user.text &&
+        datauser[0]['password'] == pass.text) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const BottomUser()),
+      );
     }
   }
 
@@ -175,6 +156,7 @@ class _UserLoginState extends State<UserLogin> {
                     const SizedBox(
                       height: 20,
                     ),
+                    Text(alert,style: TextStyle(fontSize: 14, color: Colors.red),),
                     ElevatedButton(
                       onPressed: () {
                         _login();
