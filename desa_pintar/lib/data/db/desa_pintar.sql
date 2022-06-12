@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2022 at 02:50 PM
+-- Generation Time: Jun 12, 2022 at 04:20 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -98,7 +98,7 @@ CREATE TABLE `warga` (
 --
 
 INSERT INTO `warga` (`NIK`, `password`, `nama`, `jenis_kelamin`, `alamat`, `rt`, `rw`, `kelurahan`, `tempat_lahir`, `tanggal_lahir`, `status_perkawinan`, `kewarganegaraan`, `agama`) VALUES
-('1234567890123456', 'cantikgantengserigal', 'sharah dini yundari', 'wanita', 'jalan pahlawan no.5 ', 2, 5, 'mega gemilang', 'praya', '2000-12-12', 'belum kawin', 'indonesia', 'islam');
+('1234567890123456', 'cantikgantengserigal', 'baiq tasya', 'wanita', 'jalan pahlawan no.5 ', 2, 5, 'mega gemilang', 'praya', '2000-12-12', 'belum kawin', 'indonesia', 'islam');
 
 --
 -- Indexes for dumped tables
