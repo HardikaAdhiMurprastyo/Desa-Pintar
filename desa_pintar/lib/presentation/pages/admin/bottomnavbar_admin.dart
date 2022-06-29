@@ -3,7 +3,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'home_admin.dart';
 import 'list_pengajuan.dart';
 import 'arsip_admin.dart';
-
+import 'detail_warga.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
     HomeAdminPage(),
     ListPengajuan(),
     ArsipAdmin(),
-    // DaftarWarga(),
+    DetailWarga(),
     // PengaturanAdmin(),
   ];
 
