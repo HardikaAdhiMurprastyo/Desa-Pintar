@@ -1,3 +1,4 @@
+import 'package:desa_pintar/presentation/setting.dart';
 import 'package:flutter/material.dart';
 
 class PasswordSettingPage extends StatefulWidget {
@@ -7,6 +8,7 @@ class PasswordSettingPage extends StatefulWidget {
   @override
   State<PasswordSettingPage> createState() => _PasswordSettingPageState();
 }
+
 
 class _PasswordSettingPageState extends State<PasswordSettingPage> {
   bool _isObscure = true;
@@ -152,7 +154,10 @@ class _PasswordSettingPageState extends State<PasswordSettingPage> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => SettingPage()));
+                  },
                   child: const Text(
                     'Simpan',
                     style: TextStyle(

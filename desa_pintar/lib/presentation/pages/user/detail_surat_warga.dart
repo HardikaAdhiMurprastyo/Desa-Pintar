@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+import 'dart:typed_data';
 
 class DetailSuratWarga extends StatefulWidget {
 
@@ -31,7 +35,7 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
       final response = await http.get(Uri.parse(
         //you have to take the ip address of your computer.
         //because using localhost will cause an error
-          "http://192.168.0.106/dpin/detail_surat.php?no_surat='${widget.no_surat}'"));
+          "http://192.168.0.103/dpin/detail_surat.php?no_surat='${widget.no_surat}'"));
 
       // if response successful
       if (response.statusCode == 200) {
@@ -54,6 +58,7 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         backgroundColor: const Color.fromARGB(255, 61, 192, 150),
         leading: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -341,7 +346,7 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
                     ),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(15),
-                      onTap: () {},
+                      onTap: _displayPdf,
                       child: Column(
                         children: [
                           Row(
@@ -354,7 +359,7 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: Image.asset(
-                                      'assets/assets_dpin/logo.png',
+                                      'assets/assets_dpin/pdf.png',
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -365,13 +370,21 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      'Surat Pengantar SKCK',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w700,
+                                    TextFormField(
+                                      readOnly: true,
+                                      controller: perihal,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
                                       ),
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Note Title is Required!';
+                                        }
+                                        return null;
+                                      },
                                     ),
                                     const SizedBox(height: 5),
                                     Row(
@@ -411,6 +424,498 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
             ),
           ),
 
-        ],),);
+        ],
+      ),
+    );
+  }
+  void _displayPdf() {
+    final doc = pw.Document();
+    doc.addPage(
+      pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Center(
+                child: pw.Text(
+                    'RUKUN TETANGGA 01/01 PERUMAHAN GRIYA ALAM SENTOSA\nDESA PASAR ANGIN, KECAMATAN CILEUNGSI\nKABUPATEN LOMBOK TIMUR',
+                    textAlign: pw.TextAlign.center,
+                    style: pw.TextStyle(fontSize: 15)),
+              ),
+              pw.Divider(height: 1),
+              pw.SizedBox(height: 10),
+              pw.Center(
+                child: pw.Column(children: [
+                  pw.Text(
+                    'SURAT KETERANGAN DOMISILI',
+                    style: pw.TextStyle(
+                      fontWeight: pw.FontWeight.bold,
+                      fontSize: 18,
+                      decoration: pw.TextDecoration.underline,
+                    ),
+                  ),
+                  pw.Text('No.      /INT/III/2022'),
+                ]),
+              ),
+              pw.SizedBox(height: 20),
+              pw.Text(
+                'Yang bertanda tangan di bawah ini Ketua RT.01 RW.01 Desa Pasar Angin Kecamatan Cilengsi Kabupaten Lombok Timur, Menerangkan bahwa :',
+                textAlign: pw.TextAlign.justify,
+              ),
+              pw.ListView(
+                children: [
+                  pw.Column(
+                    children: [
+                      pw.Container(
+                        margin: pw.EdgeInsets.only(
+                          left: 10,
+                          right: 50,
+                        ),
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Row(
+                          crossAxisAlignment: pw.CrossAxisAlignment.center,
+                          children: [
+                            pw.Expanded(
+                              flex: 4,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    "1. Nama",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            pw.Expanded(
+                              flex: 8,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    ": Udin Sedunia",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      pw.SizedBox(height: 5),
+                      pw.Container(
+                        margin: pw.EdgeInsets.only(
+                          left: 10,
+                          right: 50,
+                        ),
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Row(
+                          crossAxisAlignment: pw.CrossAxisAlignment.center,
+                          children: [
+                            pw.Expanded(
+                              flex: 4,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    "2. Jenis Kelamin",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            pw.Expanded(
+                              flex: 8,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    ": Perempuan",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      pw.Container(
+                        margin: pw.EdgeInsets.only(
+                          left: 10,
+                          right: 50,
+                        ),
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Row(
+                          crossAxisAlignment: pw.CrossAxisAlignment.center,
+                          children: [
+                            pw.Expanded(
+                              flex: 4,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    "3. Tempat/Tanggal Lahir",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            pw.Expanded(
+                              flex: 8,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    ": Mars, 12 Desember 2022",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      pw.Container(
+                        margin: pw.EdgeInsets.only(
+                          left: 10,
+                          right: 50,
+                        ),
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Row(
+                          crossAxisAlignment: pw.CrossAxisAlignment.center,
+                          children: [
+                            pw.Expanded(
+                              flex: 4,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    "4. NO. KK/KTP",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            pw.Expanded(
+                              flex: 8,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    ": 1234567890123456",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      pw.Container(
+                        margin: pw.EdgeInsets.only(
+                          left: 10,
+                          right: 50,
+                        ),
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Row(
+                          crossAxisAlignment: pw.CrossAxisAlignment.center,
+                          children: [
+                            pw.Expanded(
+                              flex: 4,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    "5. Pekerjaan",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            pw.Expanded(
+                              flex: 8,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    ": Mahasiswa",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      pw.Container(
+                        margin: pw.EdgeInsets.only(
+                          left: 10,
+                          right: 50,
+                        ),
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Row(
+                          crossAxisAlignment: pw.CrossAxisAlignment.center,
+                          children: [
+                            pw.Expanded(
+                              flex: 4,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    "6. Agama",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            pw.Expanded(
+                              flex: 8,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    ": Islam",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      pw.Container(
+                        margin: pw.EdgeInsets.only(
+                          left: 10,
+                          right: 50,
+                        ),
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Row(
+                          crossAxisAlignment: pw.CrossAxisAlignment.center,
+                          children: [
+                            pw.Expanded(
+                              flex: 4,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    "7. Kewarganegaraan",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            pw.Expanded(
+                              flex: 8,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    ": Indonesia",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      pw.Container(
+                        margin: pw.EdgeInsets.only(
+                          left: 10,
+                          right: 50,
+                        ),
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Row(
+                          crossAxisAlignment: pw.CrossAxisAlignment.center,
+                          children: [
+                            pw.Expanded(
+                              flex: 4,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    "8. Alamat",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            pw.Expanded(
+                              flex: 8,
+                              child: pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.Text(
+                                    ": Perum Griya Alam Sentosa Blok H, No 12, RT.01, RW.01, Perum Griya Alam Sentosa, Desa Pasar Angin, Kecamatan Cileungsi, Kabupaten Lombok Timur",
+                                    style: pw.TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              pw.Text(
+                'Adalah benar warga kami di lingkungan RT.01, RW 01, Perum Griya Alam Sentosa, Desa Pasir Angin, Kecamatan Cilengsi, Kabupaten Lombok Timur',
+                textAlign: pw.TextAlign.justify,
+              ),
+              pw.SizedBox(height: 20),
+              pw.Text(
+                'Demikian Surat keterangan domisili ini dibuat untuk dipergunakan sebagaimana mestinya.',
+                textAlign: pw.TextAlign.justify,
+              ),
+              pw.SizedBox(height: 30),
+              pw.Container(
+                child: pw.Row(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                  children: [
+                    pw.Expanded(
+                      flex: 4,
+                      child: pw.Column(
+                        children: [
+                        ],
+                      ),
+                    ),
+                    pw.SizedBox(width: 10),
+                    pw.Expanded(
+                      flex: 4,
+                      child: pw.Column(
+                        crossAxisAlignment: pw.CrossAxisAlignment.end,
+                        mainAxisAlignment: pw.MainAxisAlignment.end,
+                        children: [
+                          pw.Text('Pasar Angin, 12 Juni 2022'),
+                          pw.Text(
+                            "Ketua RT.01, RW.01",
+                            style: pw.TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                          pw.SizedBox(height: 50),
+                          pw.Text(
+                            "Supriadin",
+                            style: pw.TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+
+    /// open Preview Screen
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PreviewScreen(doc: doc),
+      ),
+    );
   }
 }
+Future<Uint8List> _generatePdf(PdfPageFormat format, String title) async {
+  final pdf = pw.Document(version: PdfVersion.pdf_1_5, compress: true);
+  final font = await PdfGoogleFonts.nunitoExtraLight();
+
+  pdf.addPage(
+    pw.Page(
+      pageFormat: format,
+      build: (context) {
+        return pw.Column(
+          children: [
+            pw.SizedBox(
+              width: double.infinity,
+              child: pw.FittedBox(
+                child: pw.Text(title, style: pw.TextStyle(font: font)),
+              ),
+            ),
+            pw.SizedBox(height: 20),
+            pw.Flexible(child: pw.FlutterLogo())
+          ],
+        );
+      },
+    ),
+  );
+  return pdf.save();
+}
+
+void generatePdf() async {
+  const title = 'eclectify Demo';
+  await Printing.layoutPdf(onLayout: (format) => _generatePdf(format, title));
+}
+
+
+class PreviewScreen extends StatelessWidget {
+  final pw.Document doc;
+
+  const PreviewScreen({
+    Key? key,
+    required this.doc,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(Icons.arrow_back_outlined),
+        ),
+        centerTitle: true,
+        title: Text("Preview"),
+      ),
+      body: PdfPreview(
+        build: (format) => doc.save(),
+        allowSharing: true,
+        allowPrinting: true,
+        initialPageFormat: PdfPageFormat.a4,
+        pdfFileName: "mydoc.pdf",
+      ),
+    );
+  }
+}
+
+

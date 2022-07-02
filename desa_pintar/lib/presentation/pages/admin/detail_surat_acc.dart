@@ -1,8 +1,10 @@
+import 'package:desa_pintar/presentation/pages/admin/bottomnavbar_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class AccSurat extends StatefulWidget {
+
   AccSurat({Key? key, required this.no_surat}) : super(key: key);
   String no_surat;
   @override
@@ -26,9 +28,9 @@ class _AccSuratState extends State<AccSurat> {
   Future _getData() async {
     try {
       final response = await http.get(Uri.parse(
-          //you have to take the ip address of your computer.
-          //because using localhost will cause an error
-          "http://192.168.0.106/dpin/detail_surat.php?no_surat='${widget.no_surat}'"));
+        //you have to take the ip address of your computer.
+        //because using localhost will cause an error
+          "http://192.168.223.208/dpin/detail_surat.php?no_surat='${widget.no_surat}'"));
 
       // if response successful
       if (response.statusCode == 200) {
@@ -192,7 +194,7 @@ class _AccSuratState extends State<AccSurat> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Flexible(
-                                flex: 1,
+                                flex:1,
                                 child: Text(
                                   'Perihal',
                                   style: const TextStyle(
@@ -240,7 +242,7 @@ class _AccSuratState extends State<AccSurat> {
                                 flex: 2,
                                 child: TextFormField(
                                   readOnly: true,
-                                  initialValue: 'Ketua RT, Ketua RW ',
+                                  initialValue:'Ketua RT, Ketua RW ',
                                   // controller: perihal,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -277,7 +279,7 @@ class _AccSuratState extends State<AccSurat> {
                                 flex: 2,
                                 child: TextFormField(
                                   readOnly: true,
-                                  initialValue: 'Baiq Tasya',
+                                  initialValue:'Baiq Tasya',
                                   // controller: perihal,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -424,7 +426,7 @@ class _AccSuratState extends State<AccSurat> {
                     width: 60,
                     height: 60,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {customDialog3(context);},
                       child: const Icon(Icons.close, size: 30),
                       style: ElevatedButton.styleFrom(
                           primary: Color.fromARGB(255, 255, 0, 0),
@@ -438,7 +440,7 @@ class _AccSuratState extends State<AccSurat> {
                     width: 60,
                     height: 60,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {customDialog2(context);},
                       child: const Icon(Icons.check, size: 30),
                       style: ElevatedButton.styleFrom(
                           primary: Color.fromARGB(255, 61, 192, 150),
@@ -452,7 +454,7 @@ class _AccSuratState extends State<AccSurat> {
                     width: 60,
                     height: 60,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {customDialog1(context);},
                       child: const Icon(Icons.arrow_forward, size: 30),
                       style: ElevatedButton.styleFrom(
                           primary: Color.fromARGB(255, 0, 0, 255),
@@ -463,9 +465,77 @@ class _AccSuratState extends State<AccSurat> {
                     ),
                   ),
                 ],
-              ))
+              )
+          ),
         ],
       ),
     );
   }
+}
+
+customDialog1(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text('Surat'),
+        content: Text('Data Berhasil Diteruskan!'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const BottomNavbar()),
+              );
+            },
+            child: Text('Konfirmasi'),
+          ),
+        ],
+      );
+    },
+  );
+}
+customDialog2(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return  AlertDialog(
+        title: Text('Surat'),
+        content: Text('Data Berhasil Dikirim!'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const BottomNavbar()),
+              );
+            },
+            child: Text('Konfirmasi'),
+          ),
+        ],
+      );
+    },
+  );
+}
+customDialog3(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return  AlertDialog(
+        title: Text('Surat'),
+        content: Text('Data Berhasil Dibatalkan'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(
+                context,
+                MaterialPageRoute(builder: (context) => const BottomNavbar()),
+              );
+            },
+            child: Text('Konfirmasi'),
+          ),
+        ],
+      );
+    },
+  );
 }

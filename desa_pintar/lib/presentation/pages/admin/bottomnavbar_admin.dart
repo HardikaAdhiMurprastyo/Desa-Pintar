@@ -1,3 +1,4 @@
+import 'package:desa_pintar/presentation/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'home_admin.dart';
@@ -19,7 +20,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
     ListPengajuan(),
     ArsipAdmin(),
     DetailWarga(),
-    // PengaturanAdmin(),
+    SettingPage(),
   ];
 
   @override

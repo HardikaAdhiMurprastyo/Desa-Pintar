@@ -1,4 +1,4 @@
-import 'package:desa_pintar/UI/admin/detail_surat_admin_acc.dart';
+import 'package:desa_pintar/presentation/pages/admin/detail_surat_acc.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:http/http.dart' as http;
@@ -26,7 +26,7 @@ class _ListPengajuanState extends State<ListPengajuan> {
       final response = await http.get(Uri.parse(
         //you have to take the ip address of your computer.
         //because using localhost will cause an error
-          "http://192.168.0.106/dpin/data_surat.php"));
+          "http://192.168.223.208/dpin/data_surat.php"));
 
       // if response successful
       if (response.statusCode == 200) {

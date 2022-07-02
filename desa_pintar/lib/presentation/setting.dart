@@ -1,4 +1,5 @@
 import 'package:desa_pintar/presentation/password_setting.dart';
+import 'package:desa_pintar/presentation/role_selection.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -59,15 +60,29 @@ class _SettingPageState extends State<SettingPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(top: 15.0, left: 50),
+                                padding: const EdgeInsets.only(top: 15.0, left: 50, bottom: 25),
                                 child: Text(
-                                  'data',
+                                  'Baiq Tasya',
                                   style: const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
+
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                Text(
+                                  '1234567890123456',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                                ]
+                              ),
+
                             ],
                           ),
                         ],
@@ -84,7 +99,7 @@ class _SettingPageState extends State<SettingPage> {
               child: InkWell(
                 onTap: (){
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) =>PasswordSettingPage()));
+                      context, MaterialPageRoute(builder: (context) => PasswordSettingPage()));
                 },
                 child: ListTile(
                   leading: Icon(Icons.lock),
@@ -139,7 +154,10 @@ class _SettingPageState extends State<SettingPage> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => RoleSelectionPage()));
+                  },
                   child: const Text(
                     'KELUAR',
                     style: TextStyle(color: Colors.white),

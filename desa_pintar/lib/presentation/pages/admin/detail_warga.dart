@@ -1,3 +1,4 @@
+import 'package:desa_pintar/presentation/pages/admin/add_user.dart';
 import 'package:flutter/material.dart';
 
 class DetailWarga extends StatelessWidget {
@@ -43,7 +44,10 @@ class DetailWarga extends StatelessWidget {
                       radius: 30,
                       backgroundColor: Colors.white,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context, MaterialPageRoute(builder: (context) => NewUser()));
+                        },
                         child: const Icon(Icons.people_alt, size: 30),
                         style: ElevatedButton.styleFrom(
                             primary: Color.fromARGB(255, 255, 255, 255),
@@ -84,8 +88,8 @@ class DetailWarga extends StatelessWidget {
                   Text(
                     "Daftar Warga",
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold
                     ),
                   )
                 ],
@@ -94,306 +98,306 @@ class DetailWarga extends StatelessWidget {
           ),
           Container(
             // height: MediaQuery.of(context).size.height,
-            padding: EdgeInsets.all(10),
-            child: ListView(
-              shrinkWrap: true,
-              primary: true,
-              scrollDirection: Axis.vertical,
-              children: [
-                Card(
-                  elevation: 10.0,
-                  shadowColor: Colors.black,
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                            left: 10,
-                            right: 50,
-                          ),
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                flex: 4,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "NIK",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                flex: 8,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "1234567890123456",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          margin: const EdgeInsets.only(
-                            left: 10,
-                            right: 50,
-                          ),
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                flex: 4,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Nama",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                flex: 8,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Username",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          margin: const EdgeInsets.only(
-                            left: 10,
-                            right: 50,
-                          ),
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                flex: 4,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Alamat",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                flex: 8,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "User_address",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          margin: const EdgeInsets.only(
-                            left: 10,
-                            right: 50,
-                          ),
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                flex: 4,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "L/P",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                flex: 8,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "User_gender",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          margin: const EdgeInsets.only(
-                            left: 10,
-                            right: 50,
-                          ),
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                flex: 4,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Password",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                flex: 8,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "12345678",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                width: 100,
-                                height: 25,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.edit,
-                                        size: 18
-                                      ),
-                                      SizedBox(width: 5),
-                                      Text(
-                                        "Edit",
-                                        style: TextStyle(
-                                          fontSize: 14
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Color.fromARGB(255, 255, 255, 0),
-                                      onPrimary: Color.fromARGB(255, 201, 147, 0),
-                                      fixedSize: const Size(310, 45),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(50))),
-                                ),
-                              ),
-                              Container(
-                                width: 100,
-                                height: 25,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                          Icons.delete,
-                                          size: 18
-                                      ),
-                                      SizedBox(width: 5),
-                                      Text(
-                                        "Hapus",
-                                        style: TextStyle(
-                                            fontSize: 14
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Color.fromARGB(255, 255, 115, 115),
-                                      onPrimary: Color.fromARGB(255, 190, 0, 0),
-                                      fixedSize: const Size(310, 45),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(50))),
-                                ),
-                              ),
-                            ],
-                          )
-                        )
-                      ],
+              padding: EdgeInsets.all(10),
+              child: ListView(
+                shrinkWrap: true,
+                primary: true,
+                scrollDirection: Axis.vertical,
+                children: [
+                  Card(
+                    elevation: 10.0,
+                    shadowColor: Colors.black,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)
                     ),
-                  ),
-                )
-              ],
-            )
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(
+                              left: 10,
+                              right: 50,
+                            ),
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "NIK",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 8,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "1234567890123456",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            margin: const EdgeInsets.only(
+                              left: 10,
+                              right: 50,
+                            ),
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Nama",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 8,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Username",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            margin: const EdgeInsets.only(
+                              left: 10,
+                              right: 50,
+                            ),
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Alamat",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 8,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "User_address",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            margin: const EdgeInsets.only(
+                              left: 10,
+                              right: 50,
+                            ),
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "L/P",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 8,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "User_gender",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            margin: const EdgeInsets.only(
+                              left: 10,
+                              right: 50,
+                            ),
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Password",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 8,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "12345678",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                              margin: EdgeInsets.only(top: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    width: 100,
+                                    height: 25,
+                                    child: ElevatedButton(
+                                      onPressed: () {},
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                              Icons.edit,
+                                              size: 18
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            "Edit",
+                                            style: TextStyle(
+                                                fontSize: 14
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Color.fromARGB(255, 255, 255, 0),
+                                          onPrimary: Color.fromARGB(255, 201, 147, 0),
+                                          fixedSize: const Size(310, 45),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(50))),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 110,
+                                    height: 25,
+                                    child: ElevatedButton(
+                                      onPressed: () {},
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                              Icons.delete,
+                                              size: 18
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            "Hapus",
+                                            style: TextStyle(
+                                                fontSize: 14
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Color.fromARGB(255, 255, 115, 115),
+                                          onPrimary: Color.fromARGB(255, 190, 0, 0),
+                                          fixedSize: const Size(310, 45),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(50))),
+                                    ),
+                                  ),
+                                ],
+                              )
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              )
           ),
         ],
       ),
