@@ -20,7 +20,7 @@ class _SettingPageState extends State<SettingPage> {
         body: Column(
           children: [
             Stack(
-              children:[
+              children: [
                 Container(
                   height: 100,
                   decoration: const BoxDecoration(
@@ -28,7 +28,6 @@ class _SettingPageState extends State<SettingPage> {
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(360),
                       bottomRight: Radius.circular(360),
-
                     ),
                   ),
                 ),
@@ -47,42 +46,38 @@ class _SettingPageState extends State<SettingPage> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(15.0),
+                          const Padding(
+                            padding: EdgeInsets.all(15.0),
                             child: CircleAvatar(
-                              backgroundImage: AssetImage(
-                                  'assets/assets_dpin/logo.png'
-                              ),
+                              backgroundImage:
+                                  AssetImage('assets/assets_dpin/logo.png'),
                               radius: 35,
                             ),
                           ),
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: const [
                               Padding(
-                                padding: const EdgeInsets.only(top: 15.0, left: 50, bottom: 25),
+                                padding: EdgeInsets.only(
+                                    top: 45, left: 0, bottom: 10, right: 60),
                                 child: Text(
                                   'Baiq Tasya',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
-
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                Text(
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 40),
+                                child: Text(
                                   '1234567890123456',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w300,
                                   ),
                                 ),
-                                ]
                               ),
-
                             ],
                           ),
                         ],
@@ -92,20 +87,22 @@ class _SettingPageState extends State<SettingPage> {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Card(
               child: InkWell(
-                onTap: (){
+                onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => PasswordSettingPage()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PasswordSettingPage()));
                 },
-                child: ListTile(
+                child: const ListTile(
                   leading: Icon(Icons.lock),
                   title: Text(
                     'Ubah Password',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.normal,
                     ),
@@ -135,8 +132,8 @@ class _SettingPageState extends State<SettingPage> {
                       print(isSwitched);
                     });
                   },
-                  activeTrackColor: Colors.lightGreenAccent,
-                  activeColor: Colors.green,
+                  activeTrackColor: Color.fromARGB(255, 102, 246, 200),
+                  activeColor: Color.fromARGB(255, 61, 192, 150),
                 ),
               ),
             ),
@@ -148,15 +145,16 @@ class _SettingPageState extends State<SettingPage> {
                 width: 150,
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor:
-                    const Color.fromARGB(255, 61, 192, 150),
+                    backgroundColor: const Color.fromARGB(255, 61, 192, 150),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
                   onPressed: () {
                     Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => RoleSelectionPage()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RoleSelectionPage()));
                   },
                   child: const Text(
                     'KELUAR',

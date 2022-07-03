@@ -7,7 +7,6 @@ import 'package:printing/printing.dart';
 import 'dart:typed_data';
 
 class DetailSuratWarga extends StatefulWidget {
-
   DetailSuratWarga({Key? key, required this.no_surat}) : super(key: key);
   String no_surat;
   @override
@@ -33,9 +32,9 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
   Future _getData() async {
     try {
       final response = await http.get(Uri.parse(
-        //you have to take the ip address of your computer.
-        //because using localhost will cause an error
-          "http://192.168.0.103/dpin/detail_surat.php?no_surat='${widget.no_surat}'"));
+          //you have to take the ip address of your computer.
+          //because using localhost will cause an error
+          "http://192.168.1.7/dpin_db/detail_surat.php?no_surat='${widget.no_surat}'"));
 
       // if response successful
       if (response.statusCode == 200) {
@@ -58,7 +57,6 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         backgroundColor: const Color.fromARGB(255, 61, 192, 150),
         leading: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -122,8 +120,8 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
                                   child: const Text(
                                     'KeteranganDomisili  /',
                                     style: const TextStyle(
-                                    fontSize: 14,
-                                  ),
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -200,7 +198,7 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Flexible(
-                                flex:1,
+                                flex: 1,
                                 child: Text(
                                   'Perihal',
                                   style: const TextStyle(
@@ -248,7 +246,7 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
                                 flex: 2,
                                 child: TextFormField(
                                   readOnly: true,
-                                  initialValue:'Ketua RT, Ketua RW ',
+                                  initialValue: 'Ketua RT, Ketua RW ',
                                   // controller: perihal,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -285,7 +283,7 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
                                 flex: 2,
                                 child: TextFormField(
                                   readOnly: true,
-                                  initialValue:'Baiq Tasya',
+                                  initialValue: 'Baiq Tasya',
                                   // controller: perihal,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -423,11 +421,11 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
               ],
             ),
           ),
-
         ],
       ),
     );
   }
+
   void _displayPdf() {
     final doc = pw.Document();
     doc.addPage(
@@ -810,8 +808,7 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
                     pw.Expanded(
                       flex: 4,
                       child: pw.Column(
-                        children: [
-                        ],
+                        children: [],
                       ),
                     ),
                     pw.SizedBox(width: 10),
@@ -856,6 +853,7 @@ class _DetailSuratWargaState extends State<DetailSuratWarga> {
     );
   }
 }
+
 Future<Uint8List> _generatePdf(PdfPageFormat format, String title) async {
   final pdf = pw.Document(version: PdfVersion.pdf_1_5, compress: true);
   final font = await PdfGoogleFonts.nunitoExtraLight();
@@ -887,7 +885,6 @@ void generatePdf() async {
   await Printing.layoutPdf(onLayout: (format) => _generatePdf(format, title));
 }
 
-
 class PreviewScreen extends StatelessWidget {
   final pw.Document doc;
 
@@ -917,5 +914,3 @@ class PreviewScreen extends StatelessWidget {
     );
   }
 }
-
-

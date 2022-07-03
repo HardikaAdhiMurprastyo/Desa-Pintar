@@ -1,6 +1,9 @@
-import 'package:desa_pintar/presentation/setting.dart';
+import 'package:desa_pintar/data/provider/berita_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:provider/provider.dart';
+import '../../../data/api/api_service.dart';
+import '../../setting.dart';
 import '../user/home_user.dart';
 import '../user/list_surat.dart';
 import '../user/riwayat.dart';
@@ -15,11 +18,14 @@ class BottomUser extends StatefulWidget {
 
 class _BottomUserState extends State<BottomUser> {
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomeUser(),
-    ListSurat(),
-    RiwayatPage(),
-    SettingPage(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    ChangeNotifierProvider<BeritaProvider>(
+      create: (_) => BeritaProvider(apiService: ApiService()),
+      child: const HomeUser(),
+    ),
+    const ListSurat(),
+    const RiwayatPage(),
+    const SettingPage(),
   ];
 
   @override
@@ -42,45 +48,46 @@ class _BottomUserState extends State<BottomUser> {
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GNav(
-                  rippleColor: const Color.fromARGB(255, 61, 192, 150),
-                  // hoverColor: Colors.transparent,
-                  gap: 12,
-                  activeColor: Colors.white,
-                  // iconSize: 24,
-                  padding: const EdgeInsets.all(10),
-                  duration: const Duration(milliseconds: 400),
-                  tabBackgroundColor: const Color.fromARGB(255, 133, 215, 185,),
-                  color: Colors.white,
-                  tabs: const[
-                    GButton(
-                      icon: Icons.home,
-                      text: 'Beranda',
-                    ),
-                    GButton(
-                      icon: Icons.mail,
-                      text: 'Pengajuan',
-                    ),
-                    GButton(
-                      icon: Icons.list_alt_outlined,
-                      text: 'Riwayat',
-                    ),
-                    GButton(
-                      icon: Icons.settings,
-                      text: 'Pengaturan',
-                    ),
-                  ],
-                  selectedIndex: _selectedIndex,
-                  onTabChange: (index) {
-                    setState(() {
-                      _selectedIndex = index;
-                    });
-                  },
+            child: GNav(
+              iconSize: MediaQuery.of(context).size.width / 13,
+              rippleColor: const Color.fromARGB(255, 61, 192, 150),
+              // hoverColor: Colors.transparent,
+              gap: 12,
+              activeColor: Colors.white,
+              // iconSize: 24,
+              padding: const EdgeInsets.all(10),
+              duration: const Duration(milliseconds: 400),
+              tabBackgroundColor: const Color.fromARGB(
+                255,
+                133,
+                215,
+                185,
+              ),
+              color: Colors.white,
+              tabs: const [
+                GButton(
+                  icon: Icons.home,
+                  text: 'Beranda',
+                ),
+                GButton(
+                  icon: Icons.mail,
+                  text: 'Pengajuan',
+                ),
+                GButton(
+                  icon: Icons.list_alt_outlined,
+                  text: 'Riwayat',
+                ),
+                GButton(
+                  icon: Icons.settings,
+                  text: 'Pengaturan',
                 ),
               ],
+              selectedIndex: _selectedIndex,
+              onTabChange: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
             ),
           ),
         ),
@@ -88,4 +95,3 @@ class _BottomUserState extends State<BottomUser> {
     );
   }
 }
-

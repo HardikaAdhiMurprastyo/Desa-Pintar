@@ -1,11 +1,13 @@
 import 'dart:convert';
-import 'package:desa_pintar/presentation/role_selection.dart';
 import 'package:desa_pintar/presentation/pages/user/bottom_user.dart';
+import 'package:desa_pintar/presentation/role_selection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:math' as math;
 import 'package:http/http.dart' as http;
 
 String nik = '';
+
 class UserLogin extends StatefulWidget {
   const UserLogin({Key? key}) : super(key: key);
 
@@ -19,8 +21,8 @@ class _UserLoginState extends State<UserLogin> {
   TextEditingController pass = TextEditingController();
 
   void _login() async {
-    final response =
-    await http.post(Uri.parse("http://192.168.0.103/dpin/login.php"), body: {
+    final response = await http
+        .post(Uri.parse("http://192.168.1.7/dpin_db/login.php"), body: {
       "NIK": user.text,
       "password": pass.text,
     });
@@ -28,10 +30,11 @@ class _UserLoginState extends State<UserLogin> {
     if (datauser.length == 0) {
       print('error');
     } else {
-      if (datauser[0]['NIK'] == user.text && datauser[0]['password'] == pass.text) {
+      if (datauser[0]['NIK'] == user.text &&
+          datauser[0]['password'] == pass.text) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const BottomUser()));
-      } 
+            context, MaterialPageRoute(builder: (context) => BottomUser()));
+      }
 
       setState(() {
         nik = datauser[0]['NIK'];
@@ -43,7 +46,7 @@ class _UserLoginState extends State<UserLogin> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false, 
+        resizeToAvoidBottomInset: false,
         body: LayoutBuilder(
           builder: (context, constraints) => Stack(
             children: [
@@ -61,11 +64,13 @@ class _UserLoginState extends State<UserLogin> {
               ),
               SafeArea(
                   child: Padding(
-                padding: const EdgeInsets.only(top: 100),
+                padding: EdgeInsets.only(top: 100),
                 child: Column(
                   children: [
                     Container(
-                        child: Center(child: Image.asset('assets/assets_dpin/ilust1.png'))),
+                        child: Center(
+                            child:
+                                Image.asset('assets/assets_dpin/ilust1.png'))),
                     Container(
                       alignment: Alignment.center,
                       padding: const EdgeInsets.only(top: 25),
@@ -81,15 +86,14 @@ class _UserLoginState extends State<UserLogin> {
                     Container(
                       child: Padding(
                         padding:
-                            const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+                            EdgeInsets.symmetric(horizontal: 40, vertical: 5),
                         child: TextField(
                           controller: user,
-                          // maxLength: 16,
-                          // keyboardType: TextInputType.number,
-                          // inputFormatters: [
-                          //   FilteringTextInputFormatter.digitsOnly,
-                          //   LengthLimitingTextInputFormatter(16),
-                          // ],
+                          maxLength: 16,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(16),
+                          ],
                           decoration: const InputDecoration(
                             focusedBorder: OutlineInputBorder(
                                 borderRadius:
@@ -113,9 +117,9 @@ class _UserLoginState extends State<UserLogin> {
                     Container(
                       child: Padding(
                         padding:
-                            const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+                            EdgeInsets.symmetric(horizontal: 40, vertical: 5),
                         child: TextField(
-                          controller:pass,
+                          controller: pass,
                           obscureText: _isObscure,
                           decoration: InputDecoration(
                             focusedBorder: const OutlineInputBorder(
@@ -135,7 +139,7 @@ class _UserLoginState extends State<UserLogin> {
                                 _isObscure
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: const Color.fromARGB(255, 61, 192, 150),
+                                color: Color.fromARGB(255, 61, 192, 150),
                               ),
                               onPressed: () {
                                 setState(
@@ -162,8 +166,8 @@ class _UserLoginState extends State<UserLogin> {
                       },
                       child: const Text('Login'),
                       style: ElevatedButton.styleFrom(
-                          primary: const Color.fromARGB(255, 61, 192, 150),
-                          textStyle: const TextStyle(
+                          primary: Color.fromARGB(255, 61, 192, 150),
+                          textStyle: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                           fixedSize: const Size(310, 45),
                           shape: RoundedRectangleBorder(
@@ -191,8 +195,7 @@ class _UserLoginState extends State<UserLogin> {
                         Navigator.pop(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                              const RoleSelectionPage()),
+                              builder: (context) => const RoleSelectionPage()),
                         );
                       },
                     )

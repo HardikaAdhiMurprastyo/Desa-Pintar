@@ -1,4 +1,3 @@
-import 'package:desa_pintar/presentation/pages/admin/list_pengajuan.dart';
 import 'package:desa_pintar/presentation/pages/user/form_pengajuan.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
@@ -39,9 +38,9 @@ class _ListSuratState extends State<ListSurat> {
           children: [
             Card(
               child: InkWell(
-                onTap: (){
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => FormPengajuan()));
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => FormPengajuan()));
                 },
                 child: const ListTile(
                   title: Text(
@@ -56,13 +55,13 @@ class _ListSuratState extends State<ListSurat> {
               ),
             ),
             SizedBox(
-            height: 10,
-          ),
+              height: 10,
+            ),
             Card(
               child: InkWell(
-                onTap: (){
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => FormPengajuan()));
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => FormPengajuan()));
                 },
                 child: const ListTile(
                   title: Text(

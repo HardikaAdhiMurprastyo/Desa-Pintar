@@ -32,7 +32,7 @@ class _NewUserState extends State<NewUser> {
   @override
   Widget build(BuildContext context) {
     // bool _isObscure1 = true;
-    final maxLines = 5;
+    const maxLines = 5;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 61, 192, 150),
@@ -100,9 +100,9 @@ class _NewUserState extends State<NewUser> {
                     const SizedBox(
                       height: 8,
                     ),
-                    Container(
+                    const SizedBox(
                       width: 312,
-                      child: const TextField(
+                      child: TextField(
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -124,7 +124,7 @@ class _NewUserState extends State<NewUser> {
                     const SizedBox(
                       height: 8,
                     ),
-                    Container(
+                    SizedBox(
                       width: 312,
                       child: DropdownButtonFormField<String>(
                         hint: const Text('Jenis Kelamin'),
@@ -157,7 +157,7 @@ class _NewUserState extends State<NewUser> {
                     const SizedBox(
                       height: 8,
                     ),
-                    Container(
+                    SizedBox(
                       width: 312,
                       child: DropdownButtonFormField<String>(
                         hint: const Text('Status Perkawinan'),
@@ -189,7 +189,7 @@ class _NewUserState extends State<NewUser> {
                     const SizedBox(
                       height: 8,
                     ),
-                    Container(
+                    SizedBox(
                       width: 312,
                       child: DropdownButtonFormField<String>(
                         hint: const Text('Agama'),
@@ -220,7 +220,7 @@ class _NewUserState extends State<NewUser> {
                     const SizedBox(
                       height: 8,
                     ),
-                    Container(
+                    SizedBox(
                       width: 312,
                       child: DropdownButtonFormField<String>(
                         hint: const Text('Pendidikan'),
@@ -252,7 +252,7 @@ class _NewUserState extends State<NewUser> {
                     const SizedBox(
                       height: 8,
                     ),
-                    Container(
+                    SizedBox(
                       width: 312,
                       child: TextField(
                         keyboardType: TextInputType.number,
@@ -282,9 +282,9 @@ class _NewUserState extends State<NewUser> {
                       width: 312,
                       height: maxLines * 24.0,
                       margin: const EdgeInsets.all(10),
-                      child: TextField(
+                      child: const TextField(
                         maxLines: maxLines,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
                           focusedBorder: OutlineInputBorder(
@@ -301,9 +301,9 @@ class _NewUserState extends State<NewUser> {
                         ),
                       ),
                     ),
-                    Container(
+                    const SizedBox(
                       width: 312,
-                      child: const TextField(
+                      child: TextField(
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,

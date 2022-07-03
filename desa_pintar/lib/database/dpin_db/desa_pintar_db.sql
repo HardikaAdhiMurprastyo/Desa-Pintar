@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2022 at 04:20 PM
+-- Generation Time: Jul 02, 2022 at 06:27 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -61,15 +61,6 @@ CREATE TABLE `surat` (
   `jenis_surat` varchar(50) NOT NULL,
   `NIK` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `surat`
---
-
-INSERT INTO `surat` (`no_surat`, `level_surat`, `status_surat`, `tanggal_surat`, `waktu_pengajuan`, `jenis_surat`, `NIK`) VALUES
-(62, 1, 'Diajukan', '2022-06-12', '17:05:01', 'Surat keterangan domisili', '1234567890123456'),
-(63, 1, 'Diajukan', '2022-06-12', '18:03:10', 'Surat pengantar kartu keluarga', '1234567890123456'),
-(64, 1, 'Diajukan', '2022-06-12', '18:44:05', 'Surat pengantar kartu keluarga', '1234567890123456');
 
 -- --------------------------------------------------------
 
@@ -137,7 +128,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `surat`
 --
 ALTER TABLE `surat`
-  MODIFY `no_surat` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `no_surat` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
