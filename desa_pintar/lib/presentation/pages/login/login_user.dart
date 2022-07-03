@@ -89,7 +89,6 @@ class _UserLoginState extends State<UserLogin> {
                             EdgeInsets.symmetric(horizontal: 40, vertical: 5),
                         child: TextField(
                           controller: user,
-                          maxLength: 16,
                           keyboardType: TextInputType.number,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(16),
